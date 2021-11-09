@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "outDir": "./build",
+    "rootDir": "./src",
+    "strict": true,
+    "lib": ["esnext"],
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@src/*": ["./src/*"],
+    },
+  },
+  "exclude": ["jest.config.ts", "coverage"]
+}

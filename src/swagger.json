@@ -1,0 +1,30 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "api-name",
+    "description": "api-description",
+    "termsOfService": "api-terms",
+    "contact": "api-owner-contact",
+    "license": "api-license",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:4000/v1",
+      "description": "API de teste"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Hello World",
+        "description": "Rota da página Home",
+        "responses": {
+          "200": {
+            "description": "Hello World"
+          }
+        }
+      }
+    }
+  }
+}
