@@ -61,13 +61,9 @@ export class RedditPostService {
     return response
   }
 
-  getAndSavePostsWithInterval(subreddit: string, interval: number) {
-    const intervalRegister = setInterval(async () => {
-      const { posts } = await this.GetHotPostsFromSubreddit(subreddit)
+  async getAndSavePostsWithInterval(subreddit: string) {
+    const { posts } = await this.GetHotPostsFromSubreddit(subreddit)
 
-      await this.postsService.createMany(posts)
-    }, interval)
-
-    return intervalRegister
+    await this.postsService.createMany(posts)
   }
 }
