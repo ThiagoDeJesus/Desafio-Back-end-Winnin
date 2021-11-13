@@ -2,6 +2,12 @@ import request from "supertest"
 import { app } from "./app"
 
 describe("Route testing", () => {
+  it("Should return an http 200 (route: GET /posts)", async () => {
+    const res = await request(app).get("/posts")
+
+    expect(res.status).toEqual(200)
+  })
+
   it('Should return an http 200 and a "message" property (route: GET /)', async () => {
     const res = await request(app).get("/")
 

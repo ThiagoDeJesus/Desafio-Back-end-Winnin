@@ -10,6 +10,8 @@ router.get("/", (req, res) => {
 
 router.get("/posts", (req, res) => PostControllerFactory().getPosts(req, res))
 
-router.get("/postsInRange")
+router.get("/posts-in-range", (req, res) =>
+  PostControllerFactory().getPostsInRange(req, res)
+)
 
 export { router }

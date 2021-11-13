@@ -21,6 +21,33 @@ class PrismaPostRepository implements IPostRepository {
 
     return posts
   }
+
+  async getManyInRange(
+    initialDate: number,
+    lastDate: number,
+    order: keyof Post
+  ): Promise<Post[]> {
+    const posts = await prisma.post.findMany({
+      where: {
+        AND: [
+          {
+            created_utc: {
+              lte: lastDate,
+            },
+          },
+          {
+            created_utc: {
+              gte: initialDate,
+            },
+          },
+        ],
+      },
+      orderBy: {
+        [order]: "desc",
+      },
+    })
+    return posts
+  }
 }
 
 export { PrismaPostRepository }
