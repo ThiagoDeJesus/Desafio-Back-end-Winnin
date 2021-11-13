@@ -8,13 +8,20 @@
     "dev": "ts-node-dev --respawn --inspect --transpile-only --ignore-watch node_modules -r tsconfig-paths/register src/server.ts",
     "start": "node -r module-alias/register build/server",
     "lint": "eslint --fix --ext .js,.ts,.json .",
-    "test": "jest"
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:up:test": "cd src/__tests__/ && docker-compose up -d",
+    "docker:down:test": "cd src/__tests__/ && docker-compose down",
+    "migrate": "npx prisma migrate dev",
+    "migrate:test": "dotenv -e .env.test -- npx prisma migrate dev",
+    "test": "yarn docker:up:test && yarn migrate:test && dotenv -e .env.test jest && yarn docker:down:test"
   },
   "dependencies": {
     "@prisma/client": "3.4.2",
     "axios": "^0.24.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
+    "dotenv-cli": "^4.1.0",
     "express": "^4.17.1",
     "module-alias": "^2.2.2",
     "prisma": "3.4.2",

@@ -1,0 +1,12 @@
+version: "3.1"
+services:
+  db:
+    image: postgres
+    restart: always
+    container_name: integration-tests-prisma
+    environment:
+      POSTGRES_PASSWORD: TestDataBase
+      POSTGRES_USER: TestDataBase
+      POSTGRES_DB: TestDataBase
+    ports:
+      - 5433:5432
