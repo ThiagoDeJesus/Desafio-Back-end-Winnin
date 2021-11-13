@@ -14,7 +14,8 @@
     "docker:down:test": "cd src/__tests__/ && docker-compose down",
     "migrate": "npx prisma migrate dev",
     "migrate:test": "dotenv -e .env.test -- npx prisma migrate dev",
-    "test": "yarn docker:up:test && yarn migrate:test && dotenv -e .env.test jest && yarn docker:down:test"
+    "pretest": "yarn docker:down:test && yarn docker:up:test",
+    "test": "yarn migrate:test && dotenv -e .env.test jest"
   },
   "dependencies": {
     "@prisma/client": "3.4.2",
