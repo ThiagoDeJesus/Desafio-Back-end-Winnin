@@ -10,7 +10,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:4000/v1",
+      "url": "http://localhost:4000",
       "description": "API de teste"
     }
   ],
@@ -23,6 +23,137 @@
           "200": {
             "description": "Hello World"
           }
+        }
+      }
+    },
+    "/posts": {
+      "get": {
+        "summary": "Retorna os posts salvos em ordem",
+        "description": "Essa rota retorna os posts salvos ordenados por ups ou por comentários",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Ordem de retorno dos posts, a ordenação padrão é por ups",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ups",
+                "comments"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação feita com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Post"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro na requisição"
+          },
+          "5XX": {
+            "description": "Erro inesperado"
+          }
+        }
+      }
+    },
+    "/postsInRange": {
+      "get": {
+        "summary": "Retorna os posts salvos em ordem em um intervalo de datas",
+        "description": "Essa rota retorna os posts salvos ordenados por ups ou por comentários em um intervalo específico de datas",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Ordem de retorno dos posts, a ordenação padrão é por ups",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ups",
+                "comments"
+              ]
+            }
+          },
+          {
+            "name": "initialDate",
+            "in": "query",
+            "description": "Data inicial às 00:00:00",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "dd-mm-yyyy"
+            }
+          },
+          {
+            "name": "finalDate",
+            "in": "query",
+            "description": "Data final às 23:59:59",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "dd-mm-yyyy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação feita com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Post"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro na requisição"
+          },
+          "5XX": {
+            "description": "Erro inesperado"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Post": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "author": {
+          "type": "string"
+        },
+        "created_utc": {
+          "type": "integer"
+        },
+        "ups": {
+          "type": "integer"
+        },
+        "num_comments": {
+          "type": "integer"
         }
       }
     }

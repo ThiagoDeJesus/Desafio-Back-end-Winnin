@@ -19,6 +19,12 @@ class PostController {
   async getPostsInRange(req: Request, res: Response) {
     const { initialDate, finalDate, order } = req.query
 
+    if (!initialDate || !finalDate) {
+      return res
+        .status(400)
+        .json({ error: "É obrigatório enviar a data inicial e final" })
+    }
+
     try {
       const posts = await this.postService.getAllInRange(
         String(initialDate),
