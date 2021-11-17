@@ -40,4 +40,9 @@ O servidor estará rodando em http://localhost:4000. Para acessar a documentaç�
 
 A api está configurada para salvar os posts do reddit diariamente às 00:00 , isso pode ser alterado na linha 26 do arquivo app.ts
 
+## Deploy
+https://save-reddit.herokuapp.com
+
+<br>
+
 Feito com 💜 by [Thiago Ramos](https://www.linkedin.com/in/ramos-thiago/) 👋🏻
