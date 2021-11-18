@@ -4,7 +4,7 @@
   "main": "build/server.js",
   "license": "MIT",
   "scripts": {
-    "build": "rimraf ./build && tsc",
+    "build": "yarn migrate && rimraf ./build && tsc",
     "dev": "ts-node-dev --respawn --inspect --transpile-only --ignore-watch node_modules -r tsconfig-paths/register src/server.ts",
     "start": "node -r module-alias/register build/server",
     "lint": "eslint --fix --ext .js,.ts,.json .",
@@ -12,7 +12,7 @@
     "docker:down": "docker-compose down",
     "docker:up:test": "cd src/__tests__/ && docker-compose up -d",
     "docker:down:test": "cd src/__tests__/ && docker-compose down",
-    "migrate": "npx prisma migrate dev",
+    "migrate": "npx prisma migrate deploy",
     "migrate:test": "dotenv -e .env.test -- npx prisma migrate dev",
     "pretest": "yarn docker:down:test && yarn docker:up:test",
     "test": "yarn migrate:test && dotenv -e .env.test jest"
